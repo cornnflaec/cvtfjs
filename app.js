@@ -2,9 +2,9 @@
 
 // You must use complete paths for the following properties
 const modelPath = "model"; // This is the path to the model folder that you downloaded from Custom Vision
-const imgPath = ["sample_pics/IMG_20200314_181056a.jpg", "sample_pics/IMG_20200314_181056.jpg"] // image directory to read multiple files
+const directory = "sample_pics" // image directory to read multiple files
 const imagePath = "sample_pics/IMG_20200229_165033.jpg"; // This is the path to the image you want to classify
-const exportImagePath = "./parsed_images/000.jpg"; // This is a path to a non exist file that will be used to store the output/overlay image
+const exportImagePath = "./parsed_images/000adf.jpg"; // This is a path to a non exist file that will be used to store the output/overlay image
 const LabelColors = { // This is a dictionary of colors for labels that will be used to generate the overlay image
 	"Apple": "rgba(0, 0, 0, 0.5)",
 	// Modify the items below to have the key = each tag name, and the value = the color you want to use to output/overlay the image
@@ -25,13 +25,14 @@ const sharp = require("sharp");
 const fs = require("fs").promises;
 const path = require("path");
 
+
 (async () => {
 	// Create a new ObjectDetectionModel instance
 	const model = new vision.ObjectDetectionModel();
 	// Load the model.json file from the modelPath defined in the Dynamic Properties above
 	await model.loadModelAsync("file://" + path.join(modelPath, "model.json"));
 	// Read the image into memory
-	const image = await fs.readFile(imgPath);
+	const image = await fs.readFile(imagePath);
 	// Execute the model on the image
 	const result = await model.executeAsync(image);
 	// Get labels.txt from the modelPath and parse it into an array of strings
