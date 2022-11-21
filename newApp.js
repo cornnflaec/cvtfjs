@@ -16,7 +16,7 @@ const path = require("path");
     const model = new vision.ObjectDetectionModel();
     await model.loadModelAsync("file://" + path.join(modelPath, "model.json"));
     // const image = await fs.readdir(directory)
-    const image = await fs.readFile(path.join(imagePath, "IMG_20200229_164804.jpg"))
+    const image = await fs.readFile(path.join(imagePath, "IMG_20200229_165115.jpg"))  // IMG_20200229_165002.jpg, IMG_20200229_165115.jpg
     const result = await model.executeAsync(image)
     const labels = (await fs.readFile(path.join(modelPath, "labels.txt"), "utf8")).split("\n")
     let objectClassifications = [];
@@ -30,8 +30,6 @@ const path = require("path");
 		objectClassifications.push(new ObjectClassification(result[0][i], result[1][i], label));
         
 	}
-
-
 
 	console.log(objectClassifications.filter((item) => item.probability >= probabilityThreshold).map((item) => `${item.label}: ${item.probability}`).join("\n"));
 
