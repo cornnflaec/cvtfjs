@@ -16,14 +16,15 @@ const path = require("path");
     const model = new vision.ObjectDetectionModel();
     await model.loadModelAsync("file://" + path.join(modelPath, "model.json"));
 	
-    const image = await fs.readFile(path.join(imagePath, fs.readdir(directory, (err,filename)=>console.log(filename))))  //sample_pics/IMG_20200229_165008.jpg IMG_20200229_165002.jpg, IMG_20200229_165115.jpg
-    //const image = await fs.readdir(directory, (err,filename)=>console.log(filename))  //sample_pics/IMG_20200229_165008.jpg IMG_20200229_165002.jpg, IMG_20200229_165115.jpg
+    const image = await fs.readFile(path.join(imagePath, "IMG_20200314_180911a.jpg"))  
+	
+	//sample_pics/IMG_20200229_165008.jpg IMG_20200229_165002.jpg, IMG_20200229_165115.jpg
+    //const image = await fs.readdir(directory, (err,filename)=>console.log(filename))  /sample_pics/IMG_20200229_165008.jpg IMG_20200229_165002.jpg, IMG_20200229_165115.jpg
 	//const image = await fs.readdir(directory, "buffer")
 
    const result = await model.executeAsync(image)
-    const labels = (await fs.readFile(path.join(modelPath, "labels.txt"), "utf8")).split("\n")
+   const labels = (await fs.readFile(path.join(modelPath, "labels.txt"), "utf8")).split("\n")
     let objectClassifications = [];
-
     for (let i = 0; i < result[0].length; i++) {
 		// Get the label index (this will correspond to the labels.txt file)
 		const labelIndex = result[2][i];

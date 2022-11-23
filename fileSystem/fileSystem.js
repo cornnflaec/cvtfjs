@@ -1,5 +1,8 @@
  
 // const directory = "../sample_pics"
+
+const { stringify } = require('querystring')
+
  
  
 // const fs = require("fs").promises;
@@ -8,5 +11,19 @@
 
 const directory = "/workspaces/cvtfjs/sample_pics"
 fs=require('fs')
-fs.readdir(directory, (err,filename)=>console.log(filename))
+
+try {
+    const fileName = fs.readdir(directory, (err,filename) => {
+        return fileName
+    }
+    )
+    console.log(stringify.fileName)
+} catch (e) {
+    logmyErrors(e)
+}
+
+
+
+    
+
 
