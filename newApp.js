@@ -1,6 +1,6 @@
 // print filename and prediction 
-const modelPath = "model"
-const imagePath = "sample_pics"
+const modelPath = "stat_model" // stat model
+const imagePath = "thermostat_image"
 const directory = "sample_pics"
 
 const probabilityThreshold = 0.5 
@@ -10,13 +10,11 @@ const vision = require("@microsoft/customvision-tfjs-node")
 const fs = require("fs").promises;
 const path = require("path");
 
-
-
 (async () => {
     const model = new vision.ObjectDetectionModel();
     await model.loadModelAsync("file://" + path.join(modelPath, "model.json"));
     // const image = await fs.readdir(directory)
-    const image = await fs.readFile(path.join(imagePath, "IMG_20200229_164804.jpg"))
+    const image = await fs.readFile(path.join(imagePath, "images (5).jpg"))
     const result = await model.executeAsync(image)
     const labels = (await fs.readFile(path.join(modelPath, "labels.txt"), "utf8")).split("\n")
     let objectClassifications = [];
@@ -31,10 +29,7 @@ const path = require("path");
         
 	}
 
-
-
 	console.log(objectClassifications.filter((item) => item.probability >= probabilityThreshold).map((item) => `${item.label}: ${item.probability}`).join("\n"));
-
     console.log("Done!");
 })()
 
@@ -49,4 +44,4 @@ class ObjectClassification {
 		this.probability = probability;
 		this.label = label;
 	}
-}
+}4

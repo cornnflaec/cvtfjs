@@ -3,8 +3,8 @@
 // You must use complete paths for the following properties
 const modelPath = "model"; // This is the path to the model folder that you downloaded from Custom Vision
 const directory = "sample_pics" // image directory to read multiple files
-const imagePath = "sample_pics/IMG_20200229_165033.jpg"; // This is the path to the image you want to classify
-const exportImagePath = "./parsed_images/000adf.jpg"; // This is a path to a non exist file that will be used to store the output/overlay image
+const imagePath = "sample_pics/IMG_20200314_181033a.jpg"; // This is the path to the image you want to classify
+const exportImagePath = "./parsed_images/00001.jpg"; // This is a path to a non exist file that will be used to store the output/overlay image
 const LabelColors = { // This is a dictionary of colors for labels that will be used to generate the overlay image
 	"Apple": "rgba(0, 0, 0, 0.5)",
 	// Modify the items below to have the key = each tag name, and the value = the color you want to use to output/overlay the image
