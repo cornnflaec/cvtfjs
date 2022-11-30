@@ -50,3 +50,6 @@ var curr, left, right, sol, stop
   return sol
 }
 console.log(getMaxColors(price, money))
+
+
+    // it init --initial-branch=main
