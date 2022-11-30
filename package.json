@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@microsoft/customvision-tfjs-node": "^1.2.0",
+    "nodemon": "^2.0.20",
     "sharp": "^0.31.2"
   }
 }
