@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const vision = require("@microsoft/customvision-tfjs-node");
-// const { CsvWriter } = require("csv-writer/src/lib/csv-writer");
+
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 
@@ -65,20 +65,41 @@ const probabilityThreshold = 0.5;
  const labelProbabilities = {};
  for (const prediction of objectClassifications) {
    const {label, probability} = prediction;
-   if (labelProbabilities[label]) {
-     labelProbabilities[label] += probability;
- } 
-else {
-     labelProbabilities[label] = probability;
-  }
- }
- const filteredClassifications = [];
- for (const label in labelProbabilities) {
-   const averageProbability = labelProbabilities[label];
-   if (averageProbability >= probabilityThreshold) {
-     filteredClassifications.push({label, probability: averageProbability});
+   if (probability >= probabilityThreshold) {
+     if (labelProbabilities[label]) {
+       labelProbabilities[label] += probability;
+     } else {
+       labelProbabilities[label] = probability;
+     }
    }
  }
+ 
+ const labelCounts = {};
+for (const prediction of objectClassifications) {
+  const {label, probability} = prediction;
+  if (labelCounts[label]) {
+    labelCounts[label] += 1;
+  } else {
+    labelCounts[label] = 1;
+  }
+  if (labelProbabilities[label]) {
+    labelProbabilities[label] += probability;
+  } else {
+    labelProbabilities[label] = probability;
+  }
+}
+
+const filteredClassifications = [];
+for (const label in labelProbabilities) {
+  const averageProbability = labelProbabilities[label] / labelCounts[label];
+  if (averageProbability >= probabilityThreshold) {
+    filteredClassifications.push({label, probability: averageProbability});
+  }
+
+
+
+
+  }
 
             console.log(`filename ${file}`)
             console.log(filteredClassifications.map((item) => `${item.label}: ${item.probability}`).join("\n"));
