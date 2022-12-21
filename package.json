@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@microsoft/customvision-tfjs-node": "^1.2.0",
+    "@tensorflow/tfjs-node-gpu": "^4.1.0",
+    "csv-writer": "^1.6.0",
     "nodemon": "^2.0.20",
     "sharp": "^0.31.2"
   }
